@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GitHub Clone</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f6f8fa;
+        }
+        .header {
+            background-color: #24292e;
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid #e1e4e8;
+        }
+        .header .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .header .search-bar {
+            flex: 1;
+            margin: 0 20px;
+        }
+        .header .search-bar input {
+            width: 100%;
+            padding: 8px;
+            border: none;
+            border-radius: 4px;
+            font-size: 16px;
+        }
+        .header .profile {
+            font-size: 18px;
+        }
+        .sidebar {
+            width: 240px;
+            background-color: #ffffff;
+            padding: 10px;
+            position: fixed;
+            top: 60px;
+            bottom: 0;
+            border-right: 1px solid #e1e4e8;
+        }
+        .sidebar .menu-item {
+            margin: 10px 0;
+            font-size: 16px;
+        }
+        .main-content {
+            margin-left: 260px;
+            padding: 20px;
+        }
+        .repo-card {
+            background-color: white;
+            border: 1px solid #e1e4e8;
+            border-radius: 4px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        .repo-card h3 {
+            margin: 0 0 10px 0;
+            font-size: 18px;
+        }
+        .repo-card p {
+            margin: 0;
+            color: #586069;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo">GitHub</div>
+        <div class="search-bar">
+            <input type="text" placeholder="Search GitHub">
+        </div>
+        <div class="profile">Profile</div>
+    </div>
+    <div class="sidebar">
+        <div class="menu-item">Pull requests</div>
+        <div class="menu-item">Issues</div>
+        <div class="menu-item">Marketplace</div>
+        <div class="menu-item">Explore</div>
+    </div>
+    <div class="main-content">
+        <div class="repo-card">
+            <h3>Repository Name 1</h3>
+            <p>Description of repository 1</p>
+        </div>
+        <div class="repo-card">
+            <h3>Repository Name 2</h3>
+            <p>Description of repository 2</p>
+        </div>
+        <!-- Add more repo cards here -->
+    </div>
+</body>
+</html>
