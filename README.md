@@ -1,22 +1,14 @@
-# AHXG Website
+# GitHub Clone
 
-Welcome to the AHXG website. This project showcases a dark-themed website with HTML and CSS.
+## Overview
+This project is a simple HTML and CSS clone of the GitHub interface. It includes a header, sidebar, and main content area to display repository information.
 
 ## Features
+- **Header**: Includes logo, search bar, and profile section.
+- **Sidebar**: Contains navigation items like Pull requests, Issues, Marketplace, and Explore.
+- **Main Content**: Displays repository cards with titles and descriptions.
 
-- **Home Page**: Welcome message and tweet functionality.
-- **About Page**: Information about AHXG.
-- **Contact Page**: Image upload functionality.
-
-## Getting Started
-
-1. Clone the repository:
-    ```bash
-    git clone https://github.com/your-username/your-repository.git
-    ```
-
-2. Open `index.html` in your browser to view the website.
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+## How to Use
+1. **Clone the Repository**: 
+   ```sh
+   git clone https://github.com/yourusername/github-clone.git
